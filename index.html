@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="tabs">
+        <button class="tab active" onclick="showView('today')">📅<br>今日</button>
+        <button class="tab" onclick="showView('history')">📊<br>履歴</button>
+        <button class="tab" onclick="showView('coaching')">💬<br>コーチ</button>
+        <button class="tab" onclick="showView('mindmap')">🗺️<br>マップ</button>
+    </div>
+    <div class="card">
+        <h1>🎯 音声ジャーナル</h1>
+        <div class="input-group">
+            <label>あなたの目標</label>
+            <div style="display: flex; gap: 0.5rem;">
+                <input type="text" id="goalInput" placeholder="例：毎日運動する...">
+                <button class="btn-primary" onclick="saveGoal()" style="width: auto; padding: 0 1.5rem;">保存</button>
+            </div>
+        </div>
+    </div>
+    <div id="todayView">
+        <div class="card">
+            <h2 style="font-size: 1.25rem; margin-bottom: 1rem;">今日の振り返り</h2>
+            <div class="text-center mb-2">
+                <button class="mic-button" id="micButton" onclick="toggleRecording()">🎤</button>
+                <p class="text-sm text-gray" id="micStatus">タップして音声入力</p>
+            </div>
+            <div class="input-group">
+                <textarea id="textInput" placeholder="今日何をしましたか？"></textarea>
+            </div>
+            <div class="input-group">
+                <label>目標への近づき度: <span id="scoreValue" style="color: #4f46e5; font-weight: 700;">5</span>点</label>
+                <input type="range" class="range-slider" min="1" max="10" value="5" id="scoreSlider" oninput="updateScore(this.value)">
+                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #6b7280;">
+                    <span>😢 1点</span>
+                    <span>😊 10点</span>
+                </div>
+            </div>
+            <button class="btn-success" onclick="saveEntry()">💾 記録を保存</button>
+        </div>
+    </div>
+    <div id="historyView" class="hidden">
+        <div class="stats">
+            <div class="stat-card"><div class="stat-value" id="avgScore">0</div><div class="stat-label">🏆 平均スコア</div></div>
+            <div class="stat-card"><div class="stat-value" id="totalDays">0</div><div class="stat-label">📅 記録日数</div></div>
+        </div>
+        <div class="card"><h2 style="font-size: 1.25rem; margin-bottom: 1rem;">過去の記録</h2><div id="entriesList"></div></div>
+    </div>
+    <div id="coachingView" class="hidden">
+        <div class="card"><h2 style="font-size: 1.25rem; margin-bottom: 1rem;">💡 AIコーチ</h2><button class="btn-primary mb-2" onclick="getCoaching()" id="coachButton">コーチングを受ける</button><div id="coachingResult"></div></div>
+    </div>
+    <div id="mindmapView" class="hidden">
+        <div class="card"><h2 style="font-size: 1.25rem; margin-bottom: 1rem;">🗺️ マインドマップ</h2><button class="btn-success mb-2" onclick="generateMindMap()" id="mapButton">マップを生成</button><div id="mindmapResult"></div></div>
+    </div>
+</div>
